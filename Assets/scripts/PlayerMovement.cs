@@ -12,11 +12,14 @@ public class PlayerMovement : MonoBehaviour {
     public float movement_acceleration;
     public float jump_velocity;
     public float static_decel;
+    public float static_in_air_decel;
 
+    private float __static_decel_cpy;
     private float __movement_acceleration_cpy;
 
 	void Awake(){
 		__body = GetComponent<Rigidbody2D> ();
+        __static_decel_cpy = static_decel;
         __movement_acceleration_cpy = movement_acceleration;
 	}
 
@@ -30,10 +33,12 @@ public class PlayerMovement : MonoBehaviour {
         if (__jumping)
         {
             movement_acceleration = in_air_movement_acceleration;
+            static_decel = static_in_air_decel;
         }
         else
         {
             movement_acceleration = __movement_acceleration_cpy;
+            static_decel = __static_decel_cpy;
         }
 
         if (Input.GetKey(KeyCode.A))
@@ -64,7 +69,8 @@ public class PlayerMovement : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            __body.velocity += new Vector2(0, jump_velocity);
+            if(!__jumping)
+                __body.velocity += new Vector2(0, jump_velocity);
         }
 	}
 
