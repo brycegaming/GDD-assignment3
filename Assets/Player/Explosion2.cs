@@ -42,7 +42,12 @@ public class Explosion2 : MonoBehaviour {
         {
             if (collision.GetComponent<Rigidbody2D>().isKinematic == false)
             {
-                Vector2 positionDifference = collision.transform.position - transform.position;
+                Vector3 collisionPosition = collision.transform.position;
+
+                collisionPosition.y = transform.position.y;
+
+                Vector2 positionDifference = collisionPosition - transform.position;
+                positionDifference.y = Mathf.Abs(positionDifference.y);
 
                 float distance = positionDifference.magnitude;
                 float forceToAdd = forceMultiplier * (maxDist - distance);

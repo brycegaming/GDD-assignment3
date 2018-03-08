@@ -56,6 +56,7 @@ public class GunUpdate : MonoBehaviour {
             GameObject newBullet = GameObject.Instantiate(bullet);
             newBullet.transform.rotation = transform.localRotation;
             newBullet.transform.position = transform.TransformPoint(arrowOffset);
+            newBullet.GetComponent<Bullet>().setPlayerObject(playerObject);
 
             Vector2 directionToFire = (Vector2)(Quaternion.Euler(0, 0, transform.eulerAngles.z) * Vector2.right);
             newBullet.GetComponent<Rigidbody2D>().velocity = directionToFire.normalized * thisFiringForce;
