@@ -15,6 +15,12 @@ public class Bullet : MonoBehaviour {
     float maxTime;
     float time;
 
+    GameObject playerObject;
+
+    public void setPlayerObject(GameObject player)
+    {
+        playerObject = player;
+    }
 
     void Start()
     {
@@ -52,10 +58,12 @@ public class Bullet : MonoBehaviour {
     {
         //create an explosion object and destroy this object
 
-        GameObject newExplosion = Instantiate(explosion);
-        newExplosion.transform.position = transform.position;
-
-        Destroy(gameObject);
+        if (collision.gameObject != playerObject)
+        {
+            GameObject newExplosion = Instantiate(explosion);
+            newExplosion.transform.position = transform.position;
+            Destroy(gameObject);
+        }
     }
     
 }

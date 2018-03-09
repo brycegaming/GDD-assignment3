@@ -2,11 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-enum BowState
-{
-    Normal, Charging, Drawn
-}
-
 public class GunUpdate : MonoBehaviour {
     
     [SerializeField] GameObject bullet;
@@ -16,7 +11,6 @@ public class GunUpdate : MonoBehaviour {
     float chargeTimeStart;
     float maxChargeTime;
     GameObject playerObject;
-    BowState state;
     Animator anim;
 
     void Awake()
@@ -27,7 +21,7 @@ public class GunUpdate : MonoBehaviour {
 
     void Start()
     {
-        anim = GameObject.Find("Bow").GetComponent<Animator>();
+        anim = transform.GetChild(0).GetComponentInChildren<Animator>();
         maxChargeTime = 0.6666f;
         arrowOffset = new Vector3(1f, -0.3f, 0f);
     }
@@ -56,9 +50,21 @@ public class GunUpdate : MonoBehaviour {
             GameObject newBullet = GameObject.Instantiate(bullet);
             newBullet.transform.rotation = transform.localRotation;
             newBullet.transform.position = transform.TransformPoint(arrowOffset);
+            newBullet.GetComponent<Bullet>().setPlayerObject(playerObject);
 
             Vector2 directionToFire = (Vector2)(Quaternion.Euler(0, 0, transform.eulerAngles.z) * Vector2.right);
             newBullet.GetComponent<Rigidbody2D>().velocity = directionToFire.normalized * thisFiringForce;
+        }
+
+        //flip the arm graphic if necessary
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (mousePosition.x > transform.position.x)
+        {
+            transform.localScale = new Vector2(1, 1);
+        }
+        else
+        {
+            transform.localScale = new Vector2(1, -1);
         }
     }
 }

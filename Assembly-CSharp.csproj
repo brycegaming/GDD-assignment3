@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{EA4BDE2B-0643-E364-6329-3C6233DEC4C7}</ProjectGuid>
+    <ProjectGuid>{DD7DBFFD-0F63-3F93-5D99-D69D9091D62E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -51,11 +51,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\scripts\BulletUpdate.cs" />
-     <Compile Include="Assets\scripts\ExplosionUpdate.cs" />
+     <Compile Include="Assets\Player\Explosion2.cs" />
+     <Compile Include="Assets\Player\GunUpdate.cs" />
+     <Compile Include="Assets\Player\PlayerMovement.cs" />
+     <Compile Include="Assets\scripts\BackToMenuBtn.cs" />
+     <Compile Include="Assets\scripts\Bullet.cs" />
+     <Compile Include="Assets\scripts\Explosion.cs" />
      <Compile Include="Assets\scripts\FollowMouse.cs" />
-     <Compile Include="Assets\scripts\GunUpdate.cs" />
-     <Compile Include="Assets\scripts\PlayerMovement.cs" />
+     <Compile Include="Assets\scripts\PlayerDeath.cs" />
+     <Compile Include="Assets\scripts\TitleScreenInstructionBtn.cs" />
+     <Compile Include="Assets\scripts\TitleScreenPlayButton.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
