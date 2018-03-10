@@ -14,7 +14,7 @@ public class AIEASYGunUpdate : MonoBehaviour
     float maxChargeTime;
     GameObject playerObject;
     [SerializeField] GameObject mainPlayer;
-    BowState state;
+    //BowState state;
     Animator anim;
 
     bool start = true;

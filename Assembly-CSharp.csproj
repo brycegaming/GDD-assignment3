@@ -51,7 +51,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Player\Explosion2.cs" />
+     <Compile Include="Assets\LandMine.cs" />
+     <Compile Include="Assets\Objects\Explosion2.cs" />
      <Compile Include="Assets\Player\GunUpdate.cs" />
      <Compile Include="Assets\Player\PlayerMovement.cs" />
      <Compile Include="Assets\scripts\AIEASYGunUpdate.cs" />

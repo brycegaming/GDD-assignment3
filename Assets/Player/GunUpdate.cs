@@ -2,19 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-<<<<<<< HEAD
-enum BowState
-{
-    Normal, Charging, Drawn
-}
-
-public class GunUpdate : MonoBehaviour
-{
-
-=======
 public class GunUpdate : MonoBehaviour {
     
->>>>>>> e2c65b8bc7216c3e3cc599ab8f69a28500f345c1
     [SerializeField] GameObject bullet;
     [SerializeField] float firingForce = 5f;
 

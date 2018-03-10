@@ -82,11 +82,11 @@ public class PlayerMovement : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space))
         {
             if(!jumping)
-                body.velocity += new Vector2(0, jumpVelocity);
+                body.velocity = new Vector2(body.velocity.x, jumpVelocity);
         }
 	}
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Platform")
         {
@@ -94,7 +94,7 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Platform")
         {
