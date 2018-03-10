@@ -2,23 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-enum BowState
-{
-    Normal, Charging, Drawn
-}
-
-public class GunUpdate : MonoBehaviour
+public class AIEASYGunUpdate : MonoBehaviour
 {
 
     [SerializeField] GameObject bullet;
     [SerializeField] float firingForce = 5f;
+    float minFireCharge = .15f;
 
     Vector3 arrowOffset;
     float chargeTimeStart;
     float maxChargeTime;
     GameObject playerObject;
+    [SerializeField] GameObject mainPlayer;
     BowState state;
     Animator anim;
+
+    bool start = true;
 
     void Awake()
     {
@@ -36,21 +35,35 @@ public class GunUpdate : MonoBehaviour
     void Update()
     {
         // Handles mouse follow
-        Vector2 dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        Vector3 targetPos = mainPlayer.transform.position;
+        float chargeTime = Time.time - chargeTimeStart;
+        chargeTime = Mathf.Clamp(chargeTime, 0f, maxChargeTime);
+
+        targetPos.y += (chargeTime);
+
+        Vector2 dir = targetPos - transform.position;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
-        // HANDLES CLICK
-        if (Input.GetMouseButtonDown(0))
+        bool fire = false;
+        int o = Random.Range(0, 210 - 3*((int)Mathf.Abs(transform.position.x - mainPlayer.transform.position.x)));
+        if (o >= 1 && o <= 5 && chargeTime > minFireCharge)
         {
+            fire = true;
+        }
+
+        // HANDLES CLICK
+        if (start)
+        {
+            start = false;
             anim.SetTrigger("StartDrawing");
             chargeTimeStart = Time.time;
         }
 
-        if (Input.GetMouseButtonUp(0))
+        if (fire)
         {
             anim.SetTrigger("Release");
-            float chargeTime = Time.time - chargeTimeStart;
+            chargeTime = Time.time - chargeTimeStart;
             chargeTime = Mathf.Clamp(chargeTime, 0f, maxChargeTime);
             float thisFiringForce = (chargeTime / maxChargeTime) * firingForce;
 
@@ -61,6 +74,8 @@ public class GunUpdate : MonoBehaviour
 
             Vector2 directionToFire = (Vector2)(Quaternion.Euler(0, 0, transform.eulerAngles.z) * Vector2.right);
             newBullet.GetComponent<Rigidbody2D>().velocity = directionToFire.normalized * thisFiringForce;
+
+            start = true;
         }
 
         //flip the arm graphic if necessary

@@ -12,6 +12,8 @@ TagManager:
   - ArrowCpy
   - Wall
   - Explosion
+  - Hazard
+  - JumpHazard
   layers:
   - Default
   - TransparentFX

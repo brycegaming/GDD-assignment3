@@ -44,8 +44,6 @@ public class Explosion2 : MonoBehaviour {
             {
                 Vector3 collisionPosition = collision.transform.position;
 
-                collisionPosition.y = transform.position.y;
-
                 Vector2 positionDifference = collisionPosition - transform.position;
                 positionDifference.y = Mathf.Abs(positionDifference.y);
 
