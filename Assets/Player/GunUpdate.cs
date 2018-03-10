@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+<<<<<<< HEAD
 enum BowState
 {
     Normal, Charging, Drawn
@@ -10,6 +11,10 @@ enum BowState
 public class GunUpdate : MonoBehaviour
 {
 
+=======
+public class GunUpdate : MonoBehaviour {
+    
+>>>>>>> e2c65b8bc7216c3e3cc599ab8f69a28500f345c1
     [SerializeField] GameObject bullet;
     [SerializeField] float firingForce = 5f;
 
@@ -17,7 +22,6 @@ public class GunUpdate : MonoBehaviour
     float chargeTimeStart;
     float maxChargeTime;
     GameObject playerObject;
-    BowState state;
     Animator anim;
 
     void Awake()
@@ -28,7 +32,7 @@ public class GunUpdate : MonoBehaviour
 
     void Start()
     {
-        anim = GameObject.Find("Bow").GetComponent<Animator>();
+        anim = transform.GetChild(0).GetComponentInChildren<Animator>();
         maxChargeTime = 0.6666f;
         arrowOffset = new Vector3(1f, -0.3f, 0f);
     }

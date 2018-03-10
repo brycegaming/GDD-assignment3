@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
 
-	private Rigidbody2D body;
-    private bool jumping;
 
     [SerializeField] float inAirMovementAcceleration;
     [SerializeField] float maxMoveSpeed;
@@ -17,7 +15,8 @@ public class PlayerMovement : MonoBehaviour {
     Animator anim;
     float staticDecelCpy;
     float movementAccelerationCpy;
-
+    Rigidbody2D body;
+    bool jumping;
     private Vector3 spawnPoint;
 
 	void Awake(){
@@ -87,17 +86,17 @@ public class PlayerMovement : MonoBehaviour {
         }
 	}
 
-    void OnCollisionExit2D(Collision2D other)
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        if (other.gameObject.tag == "Platform")
+        if (collision.gameObject.tag == "Platform")
         {
             jumping = true;
         }
     }
 
-    void OnCollisionEnter2D(Collision2D other)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (other.gameObject.tag == "Platform")
+        if (collision.gameObject.tag == "Platform")
         {
             jumping = false;
         }
