@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerDeath : MonoBehaviour {
+
+    GameManager gameManager;
     private Vector3 spawnPoint;
     private Rigidbody2D body;
-    [SerializeField] private DeathManager deaths;
+    [SerializeField] bool isPlayerOne;
 
-    void Awake()
+    void Start()
     {
+        gameManager = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameManager>();
         spawnPoint = transform.position;
         body = GetComponent<Rigidbody2D>();
     }
@@ -20,7 +23,14 @@ public class PlayerDeath : MonoBehaviour {
             transform.position = spawnPoint;
             body.velocity = new Vector3(0, 0, 0);
 
-            deaths.addDeath();
+            if (isPlayerOne)
+            {
+                gameManager.AddBlueDeath();
+            }
+            else
+            {
+                gameManager.AddRedDeath();
+            }
         }
     }
 }
