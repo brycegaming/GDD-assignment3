@@ -27,7 +27,7 @@ public class AIEASYGunUpdate : MonoBehaviour
 
     void Start()
     {
-        anim = GameObject.Find("Bow").GetComponent<Animator>();
+        anim = transform.GetChild(0).GetComponentInChildren<Animator>();
         maxChargeTime = 0.6666f;
         arrowOffset = new Vector3(1f, -0.3f, 0f);
     }

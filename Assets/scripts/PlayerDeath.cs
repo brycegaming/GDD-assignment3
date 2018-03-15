@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerDeath : MonoBehaviour {
     private Vector3 spawnPoint;
     private Rigidbody2D body;
+    [SerializeField] private DeathManager deaths;
 
     void Awake()
     {
@@ -18,6 +19,8 @@ public class PlayerDeath : MonoBehaviour {
         {
             transform.position = spawnPoint;
             body.velocity = new Vector3(0, 0, 0);
+
+            deaths.addDeath();
         }
     }
 }
