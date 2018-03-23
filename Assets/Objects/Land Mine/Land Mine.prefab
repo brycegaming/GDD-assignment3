@@ -254,7 +254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc4bf6b9957b7b549a9f3866270d3b52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosion: {fileID: 1953592262314734, guid: ef61bca60387257449b5e0ed53fad41d, type: 2}
+  explosion: {fileID: 1952084157898720, guid: 1195e05f002acbf46bdd8e81bcf3f14c, type: 2}
   explosionSizeMultiplier: 1.5
   explosionForceMultiplier: 1
 --- !u!212 &212204249509355804

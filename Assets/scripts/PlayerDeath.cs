@@ -8,6 +8,7 @@ public class PlayerDeath : MonoBehaviour {
     private Vector3 spawnPoint;
     private Rigidbody2D body;
     [SerializeField] bool isPlayerOne;
+    [SerializeField] GameObject respawnAnimationObject;
 
     void Start()
     {
@@ -20,6 +21,8 @@ public class PlayerDeath : MonoBehaviour {
     {
         if (other.gameObject.tag == "Respawn")
         {
+            Instantiate(respawnAnimationObject, transform.position, Quaternion.identity);
+
             transform.position = spawnPoint;
             body.velocity = new Vector3(0, 0, 0);
 

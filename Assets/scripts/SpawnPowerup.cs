@@ -14,6 +14,8 @@ public enum PowerupType
     POWERUP_COUNT
 }
 
+
+
 /**
  * a powerup will give the player unique abilities for the duration
  * they will always spawn in the middle of the platform given to them
@@ -89,15 +91,15 @@ public class Powerup
     public Powerup(GameObject powerupObject, GameObject spawnPlatform, float time, float powerTime, PowerupType type, float radius)
     {
         //inUseGraphic = ;
-        location = spawnPlatform.transform.position + new Vector3(0, spawnPlatform.transform.lossyScale.y);
-        this.time = time;
+        // location = spawnPlatform.transform.position + new Vector3(0, spawnPlatform.transform.lossyScale.y);
+        this.time = 10f;
         this.powerTime = powerTime;
         this.currentTime = 0;
         this.type = type;
         this.radius = radius;
-        
+
         this.powerupGameObject = GameObject.Instantiate(powerupObject);
-        this.powerupGameObject.transform.position = location;
+        this.powerupGameObject.transform.position = new Vector3(99f, 99f, 0f);
         this.powerupGameObject.tag = "Powerup";
     }
 
@@ -236,7 +238,9 @@ public class PowerupRapidFire : Powerup
 /**
  * handles everything about powerups
  * */
-public class SpawnPowerup : MonoBehaviour {
+public class SpawnPowerup : MonoBehaviour
+{
+
     /**
      * takes the spawn rate and determines how much time will be
      * needed for each powerup to spawn
@@ -364,6 +368,7 @@ public class SpawnPowerup : MonoBehaviour {
         currentPowerups.RemoveAt(powerup);
         //remove the power up from the player
     }
+    
 }
 
 

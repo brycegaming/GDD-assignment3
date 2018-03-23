@@ -26,14 +26,17 @@ public class GameManager : MonoBehaviour {
             if (redLevelsWon > blueLevelsWon)
             {
                 winText.text = "RED WINS";
+                Debug.Log("Red wins because blue got " + blueLevelsWon + " and red got " + redLevelsWon);
             }
             else if (redLevelsWon < blueLevelsWon)
             {
                 winText.text = "BLUE WINS";
+                Debug.Log("Blue wins because blue got " + blueLevelsWon + " and red got " + redLevelsWon);
             }
             else
             {
                 winText.text = "TIE GAME";
+                Debug.Log("Tie because blue got " + blueLevelsWon + " and red got " + redLevelsWon);
             }
         }
 
@@ -43,13 +46,18 @@ public class GameManager : MonoBehaviour {
         blueDeaths = 0;
         gameWon = false;
 
-        textComponentPlayer1 = GameObject.Find("Blue Death Counter").GetComponent<Text>();
-        textComponentPlayer2 = GameObject.Find("Red Death Counter").GetComponent<Text>();
-        textComponentWin = GameObject.Find("Win Text").GetComponent<Text>();
+        if (SceneManager.GetActiveScene().name != "Win")
+        {
+            textComponentPlayer1 = GameObject.Find("Blue Death Counter").GetComponent<Text>();
+            textComponentPlayer2 = GameObject.Find("Red Death Counter").GetComponent<Text>();
+            textComponentWin = GameObject.Find("Win Text").GetComponent<Text>();
+        }
     }
 
     void OnLevelWasLoaded(int level)
     {
+        Debug.Log("Red won: " + redLevelsWon + "  Blue won: " + blueLevelsWon);
+
         if (SceneManager.GetActiveScene().name != "Play")
         {
             Start();

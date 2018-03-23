@@ -24,4 +24,9 @@ public class TitleScreenInstructionBtn : MonoBehaviour
     {
         SceneManager.LoadScene("InstructionPage");
     }
+
+    public void GoToConceptArt()
+    {
+
+    }
 }

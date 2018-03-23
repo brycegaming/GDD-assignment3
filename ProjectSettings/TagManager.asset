@@ -18,6 +18,7 @@ TagManager:
   - Game Manager
   - Audio
   - Powerup
+  - PowerupSpawnPoint
   layers:
   - Default
   - TransparentFX

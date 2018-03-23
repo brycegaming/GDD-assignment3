@@ -11,7 +11,6 @@ public class Explosion2 : MonoBehaviour {
     int frameTimer = 0;
 
     float startTime;
-    float maxTimeTilDeath = .2f;
 
 	// Use this for initialization
 	void Start ()
@@ -28,11 +27,6 @@ public class Explosion2 : MonoBehaviour {
         if (frameTimer >= 3)
         {
             collider.enabled = false;
-        }
-
-        if (Time.time - startTime >= maxTimeTilDeath)
-        {
-            Destroy(gameObject);
         }
 	}
 
