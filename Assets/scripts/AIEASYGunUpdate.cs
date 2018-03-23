@@ -48,7 +48,7 @@ public class AIEASYGunUpdate : MonoBehaviour
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
         bool fire = false;
-        int o = Random.Range(0, 210 - 3*((int)Mathf.Abs(transform.position.x - mainPlayer.transform.position.x)));
+        int o = (int)Random.Range(0, 210 - 2*Mathf.Pow((int)Mathf.Abs(transform.position.x - mainPlayer.transform.position.x), 2.0f));
 
         float minTime = minFireCharge;
         int chance = 5;
@@ -71,6 +71,14 @@ public class AIEASYGunUpdate : MonoBehaviour
             anim.SetTrigger("StartDrawing");
             chargeTimeStart = Time.time;
         }
+
+        //see what is in front of the gun
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, -dir, 2.0f);
+        if (hit.collider != null && hit.collider.gameObject.tag == "Platform")
+        {
+            fire = false;
+        }
+        
 
         if (fire)
         {

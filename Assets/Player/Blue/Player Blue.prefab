@@ -57,7 +57,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4864243117551588}
-  - component: {fileID: 114677497251795888}
   m_Layer: 0
   m_Name: BowAxis
   m_TagString: Untagged
@@ -196,19 +195,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5838e9cd5a643004090ce6631be359d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114677497251795888
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1172082882303400}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4480cc86715384b4eba8e6bf63216748, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bullet: {fileID: 1990587419971440, guid: 15d03003ff2266a43883071acfdb6ae2, type: 2}
-  firingForce: 30
+  isPlayerOne: 0
+  respawnAnimationObject: {fileID: 0}
 --- !u!114 &114938736932963844
 MonoBehaviour:
   m_ObjectHideFlags: 1

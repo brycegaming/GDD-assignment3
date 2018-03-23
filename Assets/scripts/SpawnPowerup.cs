@@ -69,6 +69,14 @@ public class Powerup
     protected float radius;
 
     /**
+     * returns if the powerup has been picked up or not
+     * */
+    public bool isPickedUp()
+    {
+        return (this.powerupGameObject != null);
+    }
+
+    /**
      * getters
      * */
     public Vector2 getLocation() { return location; }
@@ -148,6 +156,7 @@ public class Powerup
      * */
     public void pickUp(GameObject player)
     {
+        currentTime = 0;
         this.player = player;
         addPowerup();
         destroy();
@@ -325,27 +334,29 @@ public class SpawnPowerup : MonoBehaviour
         //go through each powerup and update it to see if it needs to be removed or not
         //we also want to test if a player is in contact with it
         //if so, add it to the player
-        for (int i = 0; i < currentPowerups.Count; i++)
+        for (int i = currentPowerups.Count-1; i >= 0; i--)
         {
+            currentPowerups[i].addPowerup();
+
             //add the powerup to the player each frame
             //this is because when one is removed, it takes it off the player, but it is very possible that they
             //player picked up multiple powerups
             //this creates a refresh powerup effect
-            List<GameObject> collisions = currentPowerups[i].getCollisions();
-            currentPowerups[i].addPowerup();
+            List<GameObject> collisions = new List<GameObject>();
+            if(currentPowerups[i].isPickedUp())
+                collisions = currentPowerups[i].getCollisions();
 
             if (collisions.Count > 0)
             {
                 currentPowerups[i].pickUp(collisions[0]);
-                break;
             }
+        }
 
+        for(int i = currentPowerups.Count - 1; i >= 0; i--)
             if (!currentPowerups[i].update(Time.deltaTime))
             {
                 removePowerup(i);
-                break;
             }
-        }
 	}
 
     /**

@@ -36,7 +36,6 @@ public class GameManager : MonoBehaviour {
             else
             {
                 winText.text = "TIE GAME";
-                Debug.Log("Tie because blue got " + blueLevelsWon + " and red got " + redLevelsWon);
             }
         }
 
@@ -56,8 +55,6 @@ public class GameManager : MonoBehaviour {
 
     void OnLevelWasLoaded(int level)
     {
-        Debug.Log("Red won: " + redLevelsWon + "  Blue won: " + blueLevelsWon);
-
         if (SceneManager.GetActiveScene().name != "Play")
         {
             Start();

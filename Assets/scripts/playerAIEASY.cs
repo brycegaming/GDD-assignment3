@@ -271,7 +271,7 @@ public class playerAIEASY : MonoBehaviour
         
         for (int i = 0; i < powerups.Length; i++)
         {
-            if (Mathf.Abs(powerups[i].transform.position.y - this.transform.position.y) < 3)
+            if (Mathf.Abs(powerups[i].transform.position.y - this.transform.position.y) < 6)
             {
                 viablePowerup = powerups[i];
                 break;
