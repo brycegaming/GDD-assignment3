@@ -51,8 +51,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\LandMine.cs" />
+     <Compile Include="Assets\AudioManager.cs" />
+     <Compile Include="Assets\ButtonManagerWinScreen.cs" />
+     <Compile Include="Assets\GameManager.cs" />
+     <Compile Include="Assets\GameManagerCreator.cs" />
      <Compile Include="Assets\Objects\Explosion2.cs" />
+     <Compile Include="Assets\Objects\Land Mine\LandMine.cs" />
      <Compile Include="Assets\Player\GunUpdate.cs" />
      <Compile Include="Assets\Player\PlayerMovement.cs" />
      <Compile Include="Assets\scripts\AIEASYGunUpdate.cs" />
@@ -63,6 +67,8 @@
      <Compile Include="Assets\scripts\FollowMouse.cs" />
      <Compile Include="Assets\scripts\playerAIEASY.cs" />
      <Compile Include="Assets\scripts\PlayerDeath.cs" />
+     <Compile Include="Assets\scripts\PlayerPowerupController.cs" />
+     <Compile Include="Assets\scripts\SpawnPowerup.cs" />
      <Compile Include="Assets\scripts\TitleScreenInstructionBtn.cs" />
      <Compile Include="Assets\scripts\TitleScreenPlayButton.cs" />
  <Reference Include="UnityEngine.UI">

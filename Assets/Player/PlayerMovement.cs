@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
-
+    PlayerPowerupController powerups;
 
     [SerializeField] float inAirMovementAcceleration;
     [SerializeField] float maxMoveSpeed;
@@ -29,6 +29,7 @@ public class PlayerMovement : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
+        powerups = GetComponent<PlayerPowerupController>();
         anim = GetComponent<Animator>();
         jumping = false;
 	}

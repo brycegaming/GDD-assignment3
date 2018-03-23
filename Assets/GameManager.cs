@@ -37,8 +37,6 @@ public class GameManager : MonoBehaviour {
             }
         }
 
-        Debug.Log("called start in game manager, dawg");
-
         DontDestroyOnLoad(gameObject);
         
         redDeaths = 0;
@@ -63,11 +61,7 @@ public class GameManager : MonoBehaviour {
     {
 		
 	}
-
-
-
-
-
+    
     public void AddBlueDeath()
     {
         if (!gameWon)

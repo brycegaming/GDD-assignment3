@@ -17,6 +17,7 @@ TagManager:
   - UI_PlayerDeaths
   - Game Manager
   - Audio
+  - Powerup
   layers:
   - Default
   - TransparentFX

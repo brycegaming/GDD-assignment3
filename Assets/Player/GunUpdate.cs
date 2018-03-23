@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GunUpdate : MonoBehaviour {
-    
+public class GunUpdate : MonoBehaviour
+{
+    PlayerPowerupController powerups;
+
     [SerializeField] GameObject bullet;
     [SerializeField] float firingForce = 5f;
 
@@ -21,8 +23,9 @@ public class GunUpdate : MonoBehaviour {
 
     void Start()
     {
+        powerups = transform.GetComponentInParent<PlayerPowerupController>(); 
         anim = transform.GetChild(0).GetComponentInChildren<Animator>();
-        maxChargeTime = 0.6666f;
+        maxChargeTime = 0.5f;
         arrowOffset = new Vector3(1f, -0.3f, 0f);
     }
 
@@ -44,6 +47,12 @@ public class GunUpdate : MonoBehaviour {
         {
             anim.SetTrigger("Release");
             float chargeTime = Time.time - chargeTimeStart;
+
+            if (powerups.hasPowerup(PowerupType.RAPID_FIRE))
+            {
+                chargeTime *= 8;
+            }
+
             chargeTime = Mathf.Clamp(chargeTime, 0f, maxChargeTime);
             float thisFiringForce = (chargeTime / maxChargeTime) * firingForce;
 
@@ -54,6 +63,25 @@ public class GunUpdate : MonoBehaviour {
 
             Vector2 directionToFire = (Vector2)(Quaternion.Euler(0, 0, transform.eulerAngles.z) * Vector2.right);
             newBullet.GetComponent<Rigidbody2D>().velocity = directionToFire.normalized * thisFiringForce;
+
+            if (powerups.hasPowerup(PowerupType.TRIPPLE_SHOT))
+            {
+                newBullet = GameObject.Instantiate(bullet);
+                newBullet.transform.rotation = transform.localRotation;
+                newBullet.transform.position = transform.TransformPoint(arrowOffset);
+                newBullet.GetComponent<Bullet>().setPlayerObject(playerObject);
+
+                directionToFire = (Vector2)(Quaternion.Euler(0, 0, transform.eulerAngles.z + 15) * Vector2.right);
+                newBullet.GetComponent<Rigidbody2D>().velocity = directionToFire.normalized * thisFiringForce;
+
+                newBullet = GameObject.Instantiate(bullet);
+                newBullet.transform.rotation = transform.localRotation;
+                newBullet.transform.position = transform.TransformPoint(arrowOffset);
+                newBullet.GetComponent<Bullet>().setPlayerObject(playerObject);
+
+                directionToFire = (Vector2)(Quaternion.Euler(0, 0, transform.eulerAngles.z - 15) * Vector2.right);
+                newBullet.GetComponent<Rigidbody2D>().velocity = directionToFire.normalized * thisFiringForce;
+            }
         }
 
         //flip the arm graphic if necessary

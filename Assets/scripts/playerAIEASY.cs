@@ -28,6 +28,11 @@ abstract class AIObjective
     protected GameObject playerObject;
     protected GameObject AIObject;
     protected AIEnvironmentManager environmentManager;
+
+    public void setPlayer(GameObject player)
+    {
+        this.playerObject = player;
+    }
 }
 
 abstract class AIEnvironmentManager
@@ -205,6 +210,8 @@ struct AIActions {
 
 public class playerAIEASY : MonoBehaviour
 {
+    PlayerPowerupController powerups;
+
     private Rigidbody2D body;
     private bool jumping;
 
@@ -223,9 +230,11 @@ public class playerAIEASY : MonoBehaviour
     float movementAccelerationCpy;
 
     private Vector3 spawnPoint;
+    AIEnvironmentManager environmentManager;
 
     AIObjective charge;
     AIObjective run;
+    AIObjective getPowerup;
 
     void Awake()
     {
@@ -233,15 +242,17 @@ public class playerAIEASY : MonoBehaviour
         staticDecelCpy = staticDecel;
         movementAccelerationCpy = movementAcceleration;
         spawnPoint = transform.position;
-
-        AIEnvironmentManager environmentManager = new AIEnvironmentManagerAvoidHoles(this.gameObject);
-        charge = new AIGetClose(playerObject, this.gameObject, environmentManager, tooCloseRadius);
-        run = new AIRun(playerObject, this.gameObject, environmentManager, tooCloseRadius);
     }
 
     // Use this for initialization
     void Start()
     {
+        environmentManager = new AIEnvironmentManagerAvoidHoles(this.gameObject);
+        charge = new AIGetClose(playerObject, this.gameObject, environmentManager, tooCloseRadius);
+        run = new AIRun(playerObject, this.gameObject, environmentManager, tooCloseRadius);
+        getPowerup = new AIGetClose(null, this.gameObject, environmentManager, 0);
+
+        powerups = GetComponent<PlayerPowerupController>();
         anim = GetComponent<Animator>();
         jumping = false;
     }
@@ -250,11 +261,28 @@ public class playerAIEASY : MonoBehaviour
     void Update()
     {
         AIActions actions;
-        AIEnvironmentManager environmentManager = new AIEnvironmentManagerAvoidHoles(this.gameObject);
         AIObjective objective = charge;
 
         if(Mathf.Abs(playerObject.transform.position.x - transform.position.x) < tooCloseRadius)
             objective = run;
+
+        GameObject[] powerups = GameObject.FindGameObjectsWithTag("Powerup");
+        GameObject viablePowerup = null;
+        
+        for (int i = 0; i < powerups.Length; i++)
+        {
+            if (Mathf.Abs(powerups[i].transform.position.y - this.transform.position.y) < 3)
+            {
+                viablePowerup = powerups[i];
+                break;
+            }
+        }
+
+        if (viablePowerup != null)
+        {
+            objective = getPowerup;
+            getPowerup.setPlayer(viablePowerup);
+        }
 
         actions.movementAction = objective.getMovement();
         actions.jumpAction = objective.getJump();
